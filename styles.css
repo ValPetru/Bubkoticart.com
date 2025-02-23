@@ -355,7 +355,9 @@ footer {
     padding-top:70px;
 	padding-bottom:40px;
 }
-
+footer h2{
+	text-align:center;
+}
 .footer-content {
     display: flex;
     justify-content: center;
@@ -439,10 +441,6 @@ footer p {
     .footer-illustration {
         display: none; /* Oculta la imagen en dispositivos móviles */
     }
-	footer{
-		text-align: center;
-	}
-
     .footer-content {
         flex-direction: column; /* Asegura que el formulario ocupe todo el ancho */
         gap: 0; /* Elimina el espacio entre la imagen y el formulario */
