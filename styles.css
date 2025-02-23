@@ -1,0 +1,464 @@
+/* Estilos generales */
+ @font-face{
+	font-family:'Nexa-Heavy';
+	src:url(fonts/Nexa-Heavy.ttf);
+ }
+  @font-face{
+	font-family:'Webcomic';
+	src:url(fonts/Webcomic.ttf);
+ }
+  @font-face{
+	font-family:'Bebas-Regular';
+	src:url(fonts/Bebas-Regular.ttf);
+ }
+ 
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1a1a1a;
+    line-height: 1.6;
+}
+
+
+
+/*Responsive*/
+/* Estilos para el ícono de menú (tres puntitos) */
+.menu-icon {
+    display: none; /* Oculto por defecto */
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+    gap: 4px; /* Espacio entre los puntitos */
+}
+
+.menu-icon .dot {
+    width: 5px;
+    height: 5px;
+    background-color: #8A525B;
+    border-radius: 50%; /* Hace que sean círculos */
+}
+
+@media (max-width: 768px) {
+    .menu-icon {
+        display: flex; /* Mostrar el ícono de menú */
+    }
+
+    .nav-links {
+        display: none; /* Ocultar las opciones del menú por defecto */
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(255, 253, 246, 0.9);
+        position: absolute;
+        top: 60px; /* Ajusta según la altura de tu navbar */
+        left: 0;
+        z-index: 1000;
+    }
+
+    .nav-links.active {
+        display: flex; /* Mostrar las opciones del menú cuando está activo */
+    }
+
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        font-size: 1.2em;
+    }
+}
+/**/
+
+@media print{
+    body {
+        display: none;
+    }
+}
+
+.image-container {
+    position: relative;
+    display: inline-block;
+    margin: 1%; /* Espaciado entre imágenes */
+}
+
+.image-container::after {
+    content: "© Bukoticart";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none; /* Evita que la marca de agua interfiera con los clics */
+    z-index: 1; /* Asegura que la marca de agua esté sobre la imagen */
+}
+
+.image-container img {
+    display: block; /* Elimina el espacio adicional debajo de la imagen */
+    max-width: 100%; /* Asegura que la imagen no se desborde */
+    height: auto; /* Mantiene la proporción de la imagen */
+}
+
+
+main h1{
+	font-family:'Bebas-Regular';
+	font-size:70px;
+	margin:0%;
+}
+
+/* Navbar con transparencia */
+nav {
+    background-color: rgba(255, 253, 246, 0.8); /* Color de fondo con transparencia */
+    backdrop-filter: blur(5px); /* Efecto de desenfoque para una apariencia más moderna */
+    padding: 15px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    height: 4%; /* Altura fija del navbar */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+	color:#8A525B;
+    text-decoration: none;
+	font-weight:bold;
+    font-size: 1.3em;
+    transition: color 0.3s ease, font-size 0.5s ease;
+}
+
+nav ul li a:hover {
+    color:#BBBDE3;
+}
+
+nav ul li a.active {
+    text-decoration: underline; /* Subrayado */
+    text-decoration-thickness: 2px; /* Grosor del subrayado */
+    text-underline-offset: 5px; /* Espacio entre el texto y el subrayado */
+}
+
+/* Gallery */
+.row{
+	margin:auto;
+	width: 85%;
+	display:flex;
+	flex-wrap:wrap;
+}
+img{
+	width:100%;
+	cursor: pointer;
+}
+.column{
+	flex:25%;
+}
+
+.column img{
+	margin-top:1%;
+}
+@media(max-width:800px)
+{
+	.column{
+		flex:50%;
+		padding:5px;
+	}
+}
+@media(max-width:600px)
+{
+	.column{
+		flex:100%;
+		padding:5px;
+	}
+}
+
+
+
+/* Estilos para el visor de imágenes */
+.image-viewer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2000;
+}
+
+.image-viewer img {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.image-viewer .close-btn,
+.image-viewer .prev-btn,
+.image-viewer .next-btn {
+    position: absolute;
+    background: none; /* Elimina el fondo */
+    border: none;
+    font-size: 3em;
+    color: #444; /* Gris oscuro */
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.image-viewer .close-btn {
+    top: 20px;
+    right: 20px;
+}
+
+.image-viewer .prev-btn {
+    left: 20px;
+}
+
+.image-viewer .next-btn {
+    right: 20px;
+}
+
+.image-viewer .close-btn:hover,
+.image-viewer .prev-btn:hover,
+.image-viewer .next-btn:hover {
+    color: #666; /* Un gris más claro al pasar el mouse */
+}
+
+
+
+/* Sección Hero con imagen de fondo fija */
+header{
+    height: 100vh;
+    background-image: url('image/heinrey.jpg'); /* Cambia por tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Fija la imagen de fondo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h1 {
+    font-size: 4em;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    margin-bottom: 20px; /* Espacio entre el título y los íconos */
+}
+
+/* Contenedor de íconos de redes sociales */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre los íconos */
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 2em; /* Tamaño de los íconos */
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: black;
+}
+
+/* Contenido principal */
+main {
+    padding: 60px 20px;
+    background-color: #FEE8E2;
+    color: #333;
+    text-align: center;
+}
+
+/* Galería horizontal */
+.horizontal-gallery {
+    display: flex;
+    justify-content: center;
+    gap: 2%; /* Espacio entre las imágenes */
+    flex-wrap: wrap; /* Para que sea responsive */
+}
+
+.image-card {
+    width: 350px; /* Ancho fijo para cada tarjeta */
+    text-align: center;
+}
+
+.image-card img {
+    width: 100%; /* La imagen ocupa el 100% del contenedor */
+    height: 480px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Ajusta la imagen sin distorsionarla */
+    border-radius: 10px;
+    display: block; /* Elimina el espacio extra debajo de la imagen */
+	margin-top:3%;
+}
+
+.image-button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #8A525B;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    font-size: 1.2em;
+    transition: color 0.4s ease;
+}
+
+.image-button:hover {
+    color:gray;
+}
+
+
+/* Estilos para el campo de selección */
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Estilos para las opciones */
+select option {
+    padding: 10px;
+}
+
+/* Estilos para el placeholder (opción deshabilitada) */
+select option[disabled] {
+    color: grey;
+}
+
+
+/* Pie de página */
+footer {
+    background-color: #BBBDE3;
+    color: #323F74;
+    text-align: center;
+    padding-top:70px;
+	padding-bottom:40px;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5%; /* 5% más de espacio entre la imagen y el formulario */
+    margin-bottom: 20px;
+}
+
+.footer-illustration img {
+    height: 400px; /* Misma altura que el formulario */
+    width: auto;
+}
+
+.contact-form {
+    text-align: left;
+    width:100%; /* Ancho más grande para el formulario */
+}
+
+.contact-form h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 2%; /* Más espacio entre las casillas */
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 15px; /* Más padding para hacer las casillas más grandes */
+    border: 1px solid #ccc;
+	font-family:Arial;
+    font-size: 1em;
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho */
+}
+
+.contact-form textarea {
+    resize: vertical; /* Permite redimensionar verticalmente */
+}
+
+.contact-form button {
+    padding: 15px 30px; /* Botón más grande */
+    background-color: #1D223B;
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: color 0.4s ease;
+}
+
+.contact-form button:hover {
+    color:gray;
+}
+
+footer p {
+    margin:1%;
+	margin-top:3%;
+}
+
+/*Responsive*/
+/* Ocultar la imagen en dispositivos móviles */
+@media (max-width: 768px) {
+    .footer-illustration {
+        display: none; /* Oculta la imagen en dispositivos móviles */
+    }
+
+    .footer-content {
+        flex-direction: column; /* Asegura que el formulario ocupe todo el ancho */
+        gap: 0; /* Elimina el espacio entre la imagen y el formulario */
+    }
+
+    .contact-form {
+        width: 80%; /* El formulario ocupa todo el ancho */
+        max-width: 100%; /* Elimina el límite de ancho máximo */
+		margin:auto;
+    }
+}
+@media (max-width: 900px) {
+    .footer-illustration {
+        display: none; /* Oculta la imagen en dispositivos móviles */
+    }
+
+    .footer-content {
+        flex-direction: column; /* Asegura que el formulario ocupe todo el ancho */
+        gap: 0; /* Elimina el espacio entre la imagen y el formulario */
+    }
+
+    .contact-form {
+        width: 100%; /* El formulario ocupa todo el ancho */
+        max-width: 100%; /* Elimina el límite de ancho máximo */
+		margin:auto;
+    }
+	
+	.image-card img {
+		margin-top:10%;
+	}
+}
+@media (max-width: 430px) {
+    .contact-form {
+        width: 90%; /* El formulario ocupa todo el ancho */
+        max-width: 100%; /* Elimina el límite de ancho máximo */
+		margin:auto;
+    }
+}

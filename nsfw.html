@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bukoticart - NSFW</title>
+    <link rel="stylesheet" href="styles.css">
+	<link rel="apple-touch-icon" sizes="180x180" href="icon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="icon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="icon/favicon-16x16.png">
+	<link rel="manifest" href="icon/site.webmanifest">
+    <style>
+        /* Estilos para el modal de verificación de edad */
+        .age-verification-modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            color: white;
+            font-size: 1.2em;
+            text-align: center;
+        }
+
+        .age-verification-content {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+        }
+
+        .age-verification-content button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .age-verification-content button.confirm {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .age-verification-content button.deny {
+            background-color: #f44336;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos para el visor de imágenes */
+        .image-viewer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .image-viewer img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .image-viewer .viewer-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            pointer-events: none; /* Evita que la marca de agua interfiera con los clics */
+            z-index: 1; /* Asegura que la marca de agua esté sobre la imagen */
+        }
+
+        .image-viewer button {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+            color: #000;
+        }
+
+        .image-viewer .close-btn {
+            top: 20px;
+            right: 20px;
+        }
+
+        .image-viewer .prev-btn {
+            left: 20px;
+        }
+
+        .image-viewer .next-btn {
+            right: 20px;
+        }
+
+        /* Estilos para las imágenes en la galería */
+        .image-container {
+            position: relative;
+            display: inline-block;
+            margin: 10px; /* Espaciado entre imágenes */
+        }
+
+        .image-container::after {
+            content: "© Bukoticart";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.7);
+            pointer-events: none; /* Evita que la marca de agua interfiera con los clics */
+            z-index: 1; /* Asegura que la marca de agua esté sobre la imagen */
+        }
+
+        .image-container img {
+            display: block; /* Elimina el espacio adicional debajo de la imagen */
+            max-width: 100%; /* Asegura que la imagen no se desborde */
+            height: auto; /* Mantiene la proporción de la imagen */
+        }
+    </style>
+</head>
+<body id="nsfw">
+    <!-- Modal de verificación de edad -->
+    <div id="ageVerificationModal" class="age-verification-modal">
+        <div class="age-verification-content">
+            <h2>Advertencia: Contenido Explícito</h2>
+            <p>Este contenido es exclusivo para adultos. Al continuar en esta sección,
+            confirmas que eres mayor de 18 años y que estás de acuerdo con acceder 
+            a este material sensible.</p>
+            <button class="confirm">Sí, soy mayor de edad</button>
+            <button class="deny">No, salir</button>
+        </div>
+    </div>
+    <nav>
+		<!-- Responsive -->
+		<div class="menu-icon" id="menu-icon">
+			<div class="dot"></div>
+			<div class="dot"></div>
+			<div class="dot"></div>
+		</div>
+		<!-- Opciones del menú -->
+		<ul class="nav-links" id="nav-links"> <!-- Agrega el ID aquí -->
+			<li><a href="index.html">HOME</a></li>
+			<li><a href="ilustracion.html">ILUSTRACION</a></li>
+			<li><a href="diseño-personaje.html">PERSONAJES</a></li>
+			<li><a href="encargos.html">COMISIONES</a></li>
+			<li><a href="nsfw.html">NSFW</a></li>
+		</ul>
+	</nav>
+
+    <main class="hidden"> <!-- Ocultar el contenido principal hasta que se confirme la edad -->
+        <h1>NSFW</h1>
+        <div class="row">
+            <div class="column">
+                <div class="image-container">
+                    <img src="image/agus-wifu.jpg" alt="Agus Wifu">
+                </div>
+            </div>
+            <div class="column">
+                <div class="image-container">
+                    <img src="image/NICO.png" alt="Nico">
+                </div>
+            </div>
+			<div class="column">
+				<div class="image-container">
+					<img src="image/duke.png" alt="Duke">
+				</div>
+			</div>
+        </div>
+    </main>
+
+    <!-- Pie de página con ilustración y formulario de contacto -->
+    <footer>
+        <div class="footer-content">
+            <!-- Ilustración -->
+            <div class="footer-illustration">
+                <img src="image/panda.jpeg" alt="Ilustración de contacto">
+            </div>
+
+            <!-- Formulario de contacto -->
+            <section id="contacto">
+                <div class="contact-form">
+                    <h2>Ponte en contacto conmigo</h2>
+                    <form action="https://formspree.io/f/mnnjrqaj" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="nombre" placeholder="Nombre" required>
+                        </div>
+                        <!-- Campo para seleccionar el motivo -->
+                        <div class="form-group">
+                            <select id="motivo" name="motivo" required>
+                                <option value="" disabled selected>Elige una opción</option>
+                                <option value="encargo">Comisión</option>
+                                <option value="diseño-personaje">Diseño de personajes</option>
+                                <option value="ilustracion-comercial">Ilustración</option>
+                                <option value="colaboracion">Ilustración comercial</option>
+                                <option value="compra-arte">Colaboraciones creativas</option>
+                                <option value="otros">Otros</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" name="correo" placeholder="Correo electrónico" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="mensaje" rows="5" placeholder="Escribe tu mensaje aquí..." required></textarea>
+                        </div>
+                        <button type="submit">Enviar</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+        <p>&copy; 2023 Bukoticart. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+		//Responsive
+document.addEventListener("DOMContentLoaded", function () {
+    const menuIcon = document.getElementById("menu-icon");
+    const navLinks = document.getElementById("nav-links"); // Selecciona el <ul> con el ID nav-links
+
+    // Abrir o cerrar el menú al hacer clic en el ícono
+    menuIcon.addEventListener("click", function () {
+        navLinks.classList.toggle("active");
+    });
+
+    // Cerrar el menú cuando se hace clic en un enlace
+    navLinks.addEventListener("click", function () {
+        navLinks.classList.remove("active");
+    });
+});
+	//
+	document.addEventListener("DOMContentLoaded", function () {
+    // Obtén el ID de la página actual
+    const currentPage = document.body.id;
+
+    // Selecciona todos los enlaces del menú de navegación
+    const navLinks = document.querySelectorAll("nav ul li a");
+
+    // Itera sobre los enlaces y agrega la clase "active" al que coincida con la página actual
+    navLinks.forEach(link => {
+        if (link.getAttribute("href").includes(currentPage)) {
+            link.classList.add("active");
+        }
+    });
+});
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        }, false);
+
+        document.addEventListener("dragstart", function (e) {
+            e.preventDefault();
+        }, false);
+
+        // Verificación de edad
+        document.addEventListener("DOMContentLoaded", function () {
+            const ageVerificationModal = document.getElementById("ageVerificationModal");
+            const mainContent = document.querySelector("main");
+            const confirmButton = document.querySelector(".age-verification-content .confirm");
+            const denyButton = document.querySelector(".age-verification-content .deny");
+
+            // Mostrar el modal al cargar la página
+            ageVerificationModal.style.display = "flex";
+
+            // Si el usuario confirma ser mayor de edad
+            confirmButton.addEventListener("click", function () {
+                ageVerificationModal.style.display = "none";
+                mainContent.classList.remove("hidden"); // Mostrar el contenido principal
+            });
+
+            // Si el usuario niega ser mayor de edad
+            denyButton.addEventListener("click", function () {
+                window.location.href = "index.html"; // Redirigir a la página de inicio
+            });
+        });
+
+        // Visor de imágenes (el mismo que ya tenías)
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".column img");
+            const viewer = document.createElement("div");
+            viewer.classList.add("image-viewer");
+
+            viewer.innerHTML = `
+                <button class="close-btn" aria-label="Cerrar visor">&times;</button>
+                <button class="prev-btn" aria-label="Imagen anterior">&#10094;</button>
+                <img src="" alt="Imagen ampliada">
+                <button class="next-btn" aria-label="Imagen siguiente">&#10095;</button>
+                <div class="viewer-watermark">© Bukoticart</div> <!-- Marca de agua -->
+            `;
+
+            document.body.appendChild(viewer);
+
+            const viewerImg = viewer.querySelector("img");
+            const closeBtn = viewer.querySelector(".close-btn");
+            const prevBtn = viewer.querySelector(".prev-btn");
+            const nextBtn = viewer.querySelector(".next-btn");
+
+            let currentIndex = 0;
+
+            function openViewer(index) {
+                currentIndex = index;
+                viewerImg.src = images[currentIndex].src;
+                viewerImg.alt = images[currentIndex].alt || "Imagen ampliada";
+                viewer.style.display = "flex";
+            }
+
+            function closeViewer() {
+                viewer.style.display = "none";
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                viewerImg.src = images[currentIndex].src;
+                viewerImg.alt = images[currentIndex].alt || "Imagen ampliada";
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % images.length;
+                viewerImg.src = images[currentIndex].src;
+                viewerImg.alt = images[currentIndex].alt || "Imagen ampliada";
+            }
+
+            images.forEach((img, index) => {
+                img.addEventListener("click", () => openViewer(index));
+            });
+
+            closeBtn.addEventListener("click", closeViewer);
+            prevBtn.addEventListener("click", showPrev);
+            nextBtn.addEventListener("click", showNext);
+
+            document.addEventListener("keydown", (event) => {
+                if (viewer.style.display === "flex") {
+                    if (event.key === "Escape") closeViewer();
+                    if (event.key === "ArrowLeft") showPrev();
+                    if (event.key === "ArrowRight") showNext();
+                }
+            });
+
+            viewer.addEventListener("click", (event) => {
+                if (event.target === viewer) closeViewer();
+            });
+        });
+    </script>
+</body>
+</html>
